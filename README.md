@@ -54,7 +54,7 @@ class Translation extends AbstractTranslation
 > If your translation entity has another class name, use that.
 
 ```yaml
-symfonycasts_object_translation:
+pms-nz_object_translation:
     translation_class: App\Entity\Translation
 ```
 
@@ -74,8 +74,8 @@ and the `TranslatableProperty` attribute on the fields you want to translate.
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SymfonyCasts\ObjectTranslationBundle\Mapping\Translatable;
-use SymfonyCasts\ObjectTranslationBundle\Mapping\TranslatableProperty;
+use PmsNz\ObjectTranslationBundle\Mapping\Translatable;
+use PmsNz\ObjectTranslationBundle\Mapping\TranslatableProperty;
 
 #[ORM\Entity]
 #[Translatable('product')]
@@ -131,7 +131,9 @@ You can then take this file to translation service for translation. Be sure to k
 the `type`, `id`, and `field` columns intact. The `value` column is what needs to be translated
 into the desired language.
 
+<!--
 ### `object-translation:import`
+[Under development]
 
 This command imports translations from a CSV file created by the `export` command after
 the `value` column has been translated.
@@ -142,7 +144,7 @@ symfony console object-translation:import translations_fr.csv fr
 
 The first argument is the path to the CSV file, and the second argument is the locale
 of the translations in that file.
-
+-->
 ## Translation Caching
 
 For performance, translations are cached. By default, they use your `cache.app` pool
@@ -173,7 +175,9 @@ symfony console cache:pool:invalidate-tags object-translation
 symfony console cache:pool:invalidate-tags object-translation-product
 ```
 
+<!--
 ### `object-translation:warmup` Command
+[Under development]
 
 This command preloads all translations into the cache for all your
 app's enabled locales.
@@ -181,6 +185,7 @@ app's enabled locales.
 ```bash
 symfony console object-translation:warmup
 ```
+-->
 
 ## Translation Fallback Chains
 
