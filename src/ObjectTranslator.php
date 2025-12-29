@@ -8,8 +8,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use PmsNz\ObjectTranslationBundle\Model\AbstractTranslation;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use Symfony\Component\Cache\Exception\LogicException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -34,6 +36,9 @@ class ObjectTranslator
     ) {
         $this->translationRepository = $this->entityManager->getRepository($this->translationClass);
         $this->cache = $cache ?? new TagAwareAdapter(new ArrayAdapter());
+        if (!($this->cache instanceof AdapterInterface)) {
+            throw new LogicException(sprintf('The cache must implement "%s"', AdapterInterface::class));
+        }
         $this->logger->debug(sprintf('Cache is "%s".', get_class($this->cache)));
     }
 

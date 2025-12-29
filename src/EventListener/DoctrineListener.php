@@ -64,12 +64,16 @@ class DoctrineListener
             extract($translatedProperty);
             $this->logger->debug(sprintf(
                 'Restoring property "%s" of entity "%s" with id "%s" to "%s".',
-                $field,
-                $object::class,
-                $this->objectManager->getIdFor($object),
-                $change[0]
+                $field, // @phpstan-ignore variable.undefined
+                $object::class, // @phpstan-ignore variable.undefined
+                $this->objectManager->getIdFor($object), // @phpstan-ignore variable.undefined
+                $change[0], // @phpstan-ignore variable.undefined
             ));
-            $this->propertyAccessor->setValue($object, $field, $change[0]);
+            $this->propertyAccessor->setValue(
+                $object, // @phpstan-ignore variable.undefined
+                $field, // @phpstan-ignore variable.undefined
+                $change[0], // @phpstan-ignore variable.undefined
+            );
         }
     }
 
@@ -116,6 +120,6 @@ class DoctrineListener
             return;
         }
 
-        $cache->clear();
+        $cache->clear(); // @phpstan-ignore method.notFound
     }
 }
