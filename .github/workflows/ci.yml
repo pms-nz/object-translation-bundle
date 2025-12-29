@@ -17,7 +17,7 @@ jobs:
                 symfony: [ 7.4.*, 8.0.* ]
                 exclude:
                     - php: [ 8.2, 8.3 ]
-                      symfony: 8.0
+                      symfony: 8.0.*
                 include:
                     - php: 8.2
                       deps: lowest
