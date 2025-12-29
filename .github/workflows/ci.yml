@@ -14,14 +14,14 @@ jobs:
             matrix:
                 php: [ 8.2, 8.3, 8.4 ]
                 deps: [ highest ]
-                symfony: [ 7.4.*, 8.0.* ]
-                exclude:
-                    - php: [ 8.2, 8.3 ]
-                      symfony: 8.0.*
+                symfony: [ 7.4.* ]
                 include:
                     - php: 8.2
                       deps: lowest
                       symfony: 7.4.*
+                    - php: 8.4
+                      deps: highest
+                      symfony: 8.0.*
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
