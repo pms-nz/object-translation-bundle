@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PmsNz\ObjectTranslationBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use PmsNz\ObjectTranslationBundle\Model\AbstractTranslation;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -24,10 +23,6 @@ class ObjectTranslationBundle extends AbstractBundle
                     ->example('App\Entity\Translation')
                     ->isRequired()
                     ->cannotBeEmpty()
-                    ->validate()
-                        ->ifTrue(fn ($v) => !is_a($v, AbstractTranslation::class, true))
-                        ->thenInvalid('The translation_class %s must extend PmsNz\ObjectTranslationBundle\Model\AbstractTranslation.')
-                    ->end()
                 ->end()
                 ->arrayNode('cache')
                     ->info('Cache settings for object translations.')

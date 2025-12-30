@@ -4,7 +4,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use PmsNz\ObjectTranslationBundle\Command\ObjectTranslationExportCommand;
 use PmsNz\ObjectTranslationBundle\EventListener\DoctrineListener;
-use PmsNz\ObjectTranslationBundle\EventListener\LocaleRedirectSubscriber;
 use PmsNz\ObjectTranslationBundle\ObjectManager;
 use PmsNz\ObjectTranslationBundle\ObjectTranslator;
 
@@ -28,6 +27,8 @@ return static function (ContainerConfigurator $container): void {
                 param('kernel.default_locale'),
                 abstract_arg('translation class'),
             ])
+
+            ->alias(ObjectTranslator::class, 'pms-nz.object_translation.object_translator')
 
         ->set('pms-nz.object_translation.object_manager', ObjectManager::class)
             ->public()

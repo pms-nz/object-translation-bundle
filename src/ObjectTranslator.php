@@ -11,8 +11,8 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use Symfony\Component\Cache\Exception\LogicException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\Translation\Exception\InvalidArgumentException;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
@@ -34,10 +34,13 @@ class ObjectTranslator
         private ?int $cacheTtl = null,
         private ?array $fallbacks = null,
     ) {
+        if (!is_subclass_of($this->translationClass, AbstractTranslation::class)) {
+            throw new InvalidArgumentException(sprintf('Your translation class, "%s", must extend "%s".', $this->translationClass, AbstractTranslation::class));
+        }
         $this->translationRepository = $this->entityManager->getRepository($this->translationClass);
         $this->cache = $cache ?? new TagAwareAdapter(new ArrayAdapter());
         if (!($this->cache instanceof AdapterInterface)) {
-            throw new LogicException(sprintf('The cache must implement "%s"', AdapterInterface::class));
+            throw new InvalidArgumentException(sprintf('The cache must implement "%s"', AdapterInterface::class));
         }
         $this->logger->debug(sprintf('Cache is "%s".', get_class($this->cache)));
     }
