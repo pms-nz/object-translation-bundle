@@ -10,9 +10,12 @@ use PmsNz\ObjectTranslationBundle\ObjectTranslator;
 return static function (ContainerConfigurator $container): void {
     $services = $container->services()
         ->set('pms-nz.object_translator.export_command', ObjectTranslationExportCommand::class)
-        ->args([
-            service('pms-nz.object_translation.object_manager'),
-        ])
+            ->args([
+                service('pms-nz.object_translation.object_manager'),
+                service('pms-nz.object_translation.object_translator'),
+                service('translation.locale_switcher'),
+                param('kernel.default_locale'),
+            ])
             ->tag('console.command')
 
 

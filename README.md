@@ -131,6 +131,26 @@ You can then take this file to translation service for translation. Be sure to k
 the `type`, `id`, and `field` columns intact. The `value` column is what needs to be translated
 into the desired language.
 
+You may also add a `--locale` argument.
+In this case extra columns will be added according to the fallbacks for the value provided for the `--locale` argument.
+
+
+For instance, if the fallbacks for the 'es' locale is as follows:
+
+```yaml
+pms-nz_object_translation:
+    translation_class: App\Entity\Translation
+    fallbacks:
+        es: [it, fr]
+```
+
+The column headers will be
+
+```csv
+type,id,field,value,en,fr,it,es
+```
+
+with the `fr`, `it` and `es` columns providing the translations given in the `translation_class` for the `fr`, `it` and `es` locales respectively.
 <!--
 ### `object-translation:import`
 [Under development]

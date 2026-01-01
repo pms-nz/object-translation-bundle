@@ -123,4 +123,23 @@ class ObjectTranslator
     {
         return $this->cache;
     }
+
+    public function getDefaultLocale()
+    {
+        return $this->defaultLocale;
+    }
+
+    public function getFallbacks(string $locale): array
+    {
+        return $this->fallbacks[$locale] ?? [];
+    }
+
+    public function warmCache(): void
+    {
+        $dql = "SELECT t.objectType, t.locale FROM {$this->translationClass} t GROUP BY t.objectType, t.locale";
+        $query = $this->entityManager->createQuery($dql);
+        foreach ($query->getResult() as $translation) {
+            $this->getTranslations($translation['objectType'], $translation['locale']);
+        }
+    }
 }

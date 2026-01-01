@@ -5,3 +5,4 @@ composer.lock
 .php-version
 .php-cs-fixer.cache
 .idea/
+translation.csv
