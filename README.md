@@ -54,7 +54,7 @@ class Translation extends AbstractTranslation
 > If your translation entity has another class name, use that.
 
 ```yaml
-pms-nz_object_translation:
+pmsnz_object_translation:
     translation_class: App\Entity\Translation
 ```
 
@@ -138,7 +138,7 @@ In this case extra columns will be added according to the fallbacks for the valu
 For instance, if the fallbacks for the 'es' locale is as follows:
 
 ```yaml
-pms-nz_object_translation:
+pmsnz_object_translation:
     translation_class: App\Entity\Translation
     fallbacks:
         es: [it, fr]
@@ -171,7 +171,7 @@ For performance, translations are cached. By default, they use your `cache.app` 
 and have no expiration time. This can be configured:
 
 ```yaml
-pms-nz_object_translation:
+pmsnz_object_translation:
     cache:
         pool: 'cache.object_translation' # a custom pool name
         ttl: 3600 # expire after one hour
@@ -222,7 +222,7 @@ This is achieved by "chaining" the translation lookup:
 
 
 ```yaml
-pms-nz_object_translation:
+pmsnz_object_translation:
     fallbacks:
         es-dl1: [es]
         es-gp1: [es-dl1, es]
@@ -233,7 +233,7 @@ Note that these fallbacks are indexed by the locale which begins the fallback ch
 ## Full Default Configuration
 
 ```yaml
-pms-nz_object_translation:
+pmsnz_object_translation:
 
     # The class name of your Translation entity.
     translation_class:    ~ # Required, Example: App\Entity\Translation
