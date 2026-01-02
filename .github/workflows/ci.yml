@@ -12,15 +12,17 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                php: [ 8.2, 8.3, 8.4 ]
+                php: [ 8.2, 8.3, 8.4, 8.5 ]
                 deps: [ highest ]
-                symfony: [ 7.4.* ]
+                symfony: [ 7.4.*, 8.0.* ]
                 include:
                     - php: 8.2
                       deps: lowest
                       symfony: 7.4.*
-                    - php: 8.4
-                      deps: highest
+                exclude:
+                    - php: 8.2
+                      symfony: 8.0.*
+                    - php: 8.3
                       symfony: 8.0.*
         steps:
             - name: Checkout code
